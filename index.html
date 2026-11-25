@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OFF CULTURE — Outside the Noise</title>
+  <meta name="description" content="OFF CULTURE. Built off the default grid. Anti-hype, pro-craft garments, objects, and digital identity systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Montserrat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F5F5F4;
+      --bg-elevated: #FAFAF9;
+      --bg-card: #EFEFED;
+      --bg-invert: #0A0A0A;
+      --text: #0A0A0A;
+      --text-muted: #5C5C5A;
+      --text-faint: #8C8C88;
+      --text-invert: #F5F5F4;
+      --border: rgba(10, 10, 10, 0.11);
+      --border-strong: rgba(10, 10, 10, 0.24);
+      --grid-line: rgba(10, 10, 10, 0.045);
+      --shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.12);
+      --radius: 2px;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-logo: 'Montserrat', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --transition: 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0A0A0A;
+      --bg-elevated: #121212;
+      --bg-card: #161616;
+      --bg-invert: #F5F5F4;
+      --text: #F5F5F4;
+      --text-muted: #A1A19E;
+      --text-faint: #666663;
+      --text-invert: #0A0A0A;
+      --border: rgba(245, 245, 244, 0.12);
+      --border-strong: rgba(245, 245, 244, 0.26);
+      --grid-line: rgba(245, 245, 244, 0.04);
+      --shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.65);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--transition), color var(--transition);
+      overflow-x: hidden;
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    button {
+      font-family: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    [hidden] { display: none !important; }
+
+    .container {
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @media (min-width: 768px) {
+      .container { padding: 0 40px; }
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ================= HEADER ================= */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+      gap: 20px;
+    }
+
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-badge-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 28px;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .brand-wordmark {
+      font-family: var(--font-logo);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 32px;
+    }
+
+    @media (min-width: 900px) {
+      .nav-links { display: flex; }
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      height: 38px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: border-color var(--transition), background-color var(--transition), color var(--transition);
+    }
+
+    .icon-btn:hover { border-color: var(--text); }
+
+    .icon-btn.primary {
+      background: var(--bg-invert);
+      color: var(--text-invert);
+      border-color: var(--bg-invert);
+    }
+
+    .icon-btn.primary:hover { opacity: 0.88; }
+
+    .mobile-menu-btn { display: inline-flex; }
+    @media (min-width: 900px) {
+      .mobile-menu-btn { display: none; }
+    }
+
+    /* ================= BUTTONS ================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 26px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-strong);
+      transition: all var(--transition);
+    }
+
+    .btn-dark {
+      background: var(--bg-invert);
+      color: var(--text-invert);
+      border-color: var(--bg-invert);
+    }
+
+    .btn-dark:hover {
+      transform: translateY(-1px);
+      opacity: 0.9;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text);
+      background: var(--bg-card);
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      padding: 56px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    @media (min-width: 960px) {
+      .hero { padding: 84px 0 96px; }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @media (min-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 64px;
+      }
+    }
+
+    .tagline-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      margin-bottom: 24px;
+      cursor: pointer;
+    }
+
+    .signal-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text);
+      display: inline-block;
+      animation: pulse 2.4s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 6vw, 4.9rem);
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 34px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+
+    .hero-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+      gap: 16px;
+    }
+
+    .spec-label {
+      color: var(--text-faint);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .spec-val {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* Official Circular Brand Seal Card */
+    .emblem-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 28px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      position: relative;
+    }
+
+    .corner-tick {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-color: var(--text);
+      border-style: solid;
+      border-width: 0;
+    }
+    .ct-tl { top: -1px; left: -1px; border-top-width: 1.5px; border-left-width: 1.5px; }
+    .ct-tr { top: -1px; right: -1px; border-top-width: 1.5px; border-right-width: 1.5px; }
+    .ct-bl { bottom: -1px; left: -1px; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+    .ct-br { bottom: -1px; right: -1px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+    .logo-seal-circle {
+      width: 100%;
+      max-width: 340px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: #F4F4F3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(10, 10, 10, 0.06);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .emblem-stage:hover .logo-seal-circle {
+      transform: scale(1.018);
+    }
+
+    .seal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .seal-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .seal-svg {
+      width: 44%;
+      height: auto;
+      display: block;
+      margin-bottom: 20px;
+      color: #0A0A0A;
+    }
+
+    .seal-wordmark {
+      font-family: var(--font-logo);
+      font-weight: 700;
+      font-size: clamp(0.76rem, 1.9vw, 0.94rem);
+      letter-spacing: 0.44em;
+      text-indent: 0.44em;
+      color: #0A0A0A;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .emblem-meta {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    /* ================= TICKER ================= */
+    .ticker-bar {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-elevated);
+      overflow: hidden;
+      padding: 13px 0;
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 32s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      padding-right: 24px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ================= MANIFESTO / POSITIONING ================= */
+    .manifesto-section {
+      background: var(--bg-invert);
+      color: var(--text-invert);
+      padding: 88px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .section-head {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.06;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      border-left: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    [data-theme="dark"] .pillars-grid {
+      border-color: rgba(10, 10, 10, 0.14);
+    }
+
+    @media (min-width: 860px) {
+      .pillars-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .pillar-card {
+      padding: 36px 30px;
+      border-right: 1px solid rgba(255, 255, 255, 0.14);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    [data-theme="dark"] .pillar-card {
+      border-color: rgba(10, 10, 10, 0.14);
+    }
+
+    .pillar-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .pillar-card p { opacity: 0.76; font-size: 0.95rem; }
+
+    .pillar-solve {
+      padding-top: 16px;
+      border-top: 1px dashed currentColor;
+      opacity: 0.6;
+    }
+
+    /* ================= DROPS / CATALOG ================= */
+    .section-pad {
+      padding: 88px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 9px 16px;
+      border: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: all var(--transition);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--bg-invert);
+      color: var(--text-invert);
+      border-color: var(--bg-invert);
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .catalog-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .product-card {
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      display: flex;
+      flex-direction: column;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .product-card:hover {
+      border-color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    .product-visual {
+      aspect-ratio: 4 / 3;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 28px;
+      overflow: hidden;
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 4px 8px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .product-code {
+      position: absolute;
+      top: 16px;
+      right: 14px;
+      color: var(--text-faint);
+    }
+
+    .product-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .product-name {
+      font-family: var(--font-display);
+      font-size: 1.12rem;
+      font-weight: 600;
+    }
+
+    .product-price {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .product-desc {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .product-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .btn-sm {
+      padding: 11px 16px;
+      font-size: 0.72rem;
+    }
+
+    /* ================= STUDIO / DIGITAL WORK ================= */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    @media (min-width: 960px) {
+      .studio-grid {
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 48px;
+      }
+    }
+
+    .studio-tabs {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+
+    .studio-tab {
+      text-align: left;
+      padding: 24px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: background-color var(--transition), padding-left var(--transition);
+    }
+
+    .studio-tab:hover,
+    .studio-tab.active {
+      background: var(--bg-elevated);
+      padding-left: 24px;
+    }
+
+    .studio-tab.active { border-left: 3px solid var(--text); }
+
+    .studio-tab-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: block;
+      margin-top: 4px;
+    }
+
+    .studio-preview {
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 410px;
+    }
+
+    .studio-canvas {
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 28px;
+      margin-bottom: 28px;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .studio-deliverables {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0 26px;
+    }
+
+    .chip {
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* ================= DISPATCH / NEWSLETTER ================= */
+    .dispatch-box {
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      padding: 40px 28px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media (min-width: 860px) {
+      .dispatch-box {
+        grid-template-columns: 1.1fr 0.9fr;
+        padding: 56px;
+      }
+    }
+
+    .dispatch-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (min-width: 540px) {
+      .dispatch-row { display: flex; gap: 10px; }
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      border-radius: var(--radius);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .input-field:focus { border-color: var(--text); }
+
+    .form-feedback {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      min-height: 1.2em;
+    }
+
+    /* ================= FOOTER ================= */
+    .site-footer {
+      padding: 64px 0 40px;
+      background: var(--bg-elevated);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1fr; }
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .footer-col a:hover { color: var(--text); }
+
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      color: var(--text-faint);
+    }
+
+    /* ================= DRAWER & MODAL ================= */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.55);
+      backdrop-filter: blur(4px);
+      z-index: 90;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+
+    .overlay.open { opacity: 1; pointer-events: auto; }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 440px;
+      height: 100%;
+      background: var(--bg-elevated);
+      border-left: 1px solid var(--border);
+      z-index: 100;
+      transform: translateX(100%);
+      transition: transform var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer.open { transform: translateX(0); }
+
+    .drawer-head {
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .drawer-foot {
+      padding: 22px 24px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .bag-item {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 14px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .bag-thumb {
+      width: 64px;
+      height: 64px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-ctrl {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      margin-top: 8px;
+    }
+
+    .qty-ctrl button {
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+    }
+
+    .qty-ctrl span {
+      padding: 0 10px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -46%) scale(0.97);
+      width: calc(100% - 32px);
+      max-width: 680px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: all var(--transition);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .modal.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 76px;
+      left: 0;
+      right: 0;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+      padding: 24px;
+      z-index: 49;
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .mobile-drawer.open { display: flex; }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand-lockup" aria-label="OFF CULTURE Home">
+        <img src="logo.png" alt="OFF CULTURE Logo" class="brand-badge-img" onerror="this.hidden=true; this.nextElementSibling.hidden=false;" />
+        <svg class="brand-mark" viewBox="8 6 98 60" aria-hidden="true" hidden>
+          <mask id="oc-cut-header" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="72">
+            <rect x="0" y="0" width="120" height="72" fill="#ffffff" />
+            <path d="M 63.9 44.9 A 27.4 27.4 0 0 1 40.4 63.3" fill="none" stroke="#000000" stroke-width="3.6" stroke-linecap="round" />
+          </mask>
+          <path d="M 92.8 27.2 A 19.5 19.5 0 1 0 92.8 44.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="butt" mask="url(#oc-cut-header)" />
+          <circle cx="38" cy="36" r="19.5" fill="none" stroke="currentColor" stroke-width="13" />
+        </svg>
+        <span class="brand-wordmark">OFF CULTURE</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#manifesto">01 / Ethos</a>
+        <a href="#drops">02 / Drops</a>
+        <a href="#studio">03 / Studio</a>
+        <a href="#dispatch">04 / Dispatch</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle color mode">
+          <span id="themeLabel">DARK</span>
+        </button>
+        <button class="icon-btn primary" id="openBagBtn" aria-label="Open shopping bag">
+          <span>BAG</span>
+          <span id="bagCount">(0)</span>
+        </button>
+        <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">MENU</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#manifesto" class="mono" onclick="closeMobileMenu()">01 / Ethos</a>
+    <a href="#drops" class="mono" onclick="closeMobileMenu()">02 / Drops</a>
+    <a href="#studio" class="mono" onclick="closeMobileMenu()">03 / Studio</a>
+    <a href="#dispatch" class="mono" onclick="closeMobileMenu()">04 / Dispatch</a>
+  </div>
+
+  <!-- ================= HERO ================= -->
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <button class="tagline-switcher" id="taglineBtn" title="Click to cycle brand tagline">
+            <span class="signal-dot"></span>
+            <span class="mono" id="taglineText">BUILT OFF THE DEFAULT GRID.</span>
+            <span class="mono" style="color:var(--text-faint);">↻</span>
+          </button>
+
+          <h1 class="hero-title">
+            Anti-hype.<br />
+            Pro-craft.<br />
+            Zero noise.
+          </h1>
+
+          <p class="hero-sub">
+            OFF CULTURE builds deliberate garments, desk objects, and visual identity systems for creatives, gamers, and independent builders who refuse to dress—or create—like a walking billboard.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="#drops" class="btn btn-dark">Explore Drop 04 →</a>
+            <a href="#studio" class="btn btn-outline">Studio Identity Work</a>
+          </div>
+
+          <div class="hero-specs">
+            <div>
+              <span class="mono spec-label">Positioning</span>
+              <span class="spec-val">High-Signal Craft</span>
+            </div>
+            <div>
+              <span class="mono spec-label">Batch Model</span>
+              <span class="spec-val">Numbered Micro-Runs</span>
+            </div>
+            <div>
+              <span class="mono spec-label">Dispatch</span>
+              <span class="spec-val">48H Direct Ship</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Official Circular Brand Seal Card -->
+        <div class="emblem-stage">
+          <span class="corner-tick ct-tl"></span>
+          <span class="corner-tick ct-tr"></span>
+          <span class="corner-tick ct-bl"></span>
+          <span class="corner-tick ct-br"></span>
+
+          <div class="logo-seal-circle" role="img" aria-label="OFF CULTURE interlocking OC monogram circular emblem">
+            <img src="logo.png" alt="OFF CULTURE Official Circular Emblem" class="seal-img" onerror="this.hidden=true; this.nextElementSibling.hidden=false;" />
+            <div class="seal-fallback" hidden>
+              <svg class="seal-svg" viewBox="8 6 98 60" aria-hidden="true">
+                <mask id="oc-cut-seal" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="72">
+                  <rect x="0" y="0" width="120" height="72" fill="#ffffff" />
+                  <path d="M 63.9 44.9 A 27.4 27.4 0 0 1 40.4 63.3" fill="none" stroke="#000000" stroke-width="3.6" stroke-linecap="round" />
+                </mask>
+                <path d="M 92.8 27.2 A 19.5 19.5 0 1 0 92.8 44.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="butt" mask="url(#oc-cut-seal)" />
+                <circle cx="38" cy="36" r="19.5" fill="none" stroke="currentColor" stroke-width="13" />
+              </svg>
+              <div class="seal-wordmark">OFF CULTURE</div>
+            </div>
+          </div>
+
+          <div class="emblem-meta mono">
+            <span>MARK // OC-00</span>
+            <span>ARCH: 2025.04</span>
+            <span>STATUS: ACTIVE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TICKER ================= -->
+    <div class="ticker-bar" aria-hidden="true">
+      <div class="ticker-track">
+        <span class="ticker-item">OUTSIDE THE NOISE <span>//</span></span>
+        <span class="ticker-item">CULTURE, RE-EDITED <span>//</span></span>
+        <span class="ticker-item">NO LOUD LOGOS <span>//</span></span>
+        <span class="ticker-item">BUILT OFF THE DEFAULT GRID <span>//</span></span>
+        <span class="ticker-item">GARMENTS · OBJECTS · DIGITAL IDENTITY <span>//</span></span>
+        <span class="ticker-item">OUTSIDE THE NOISE <span>//</span></span>
+        <span class="ticker-item">CULTURE, RE-EDITED <span>//</span></span>
+        <span class="ticker-item">NO LOUD LOGOS <span>//</span></span>
+        <span class="ticker-item">BUILT OFF THE DEFAULT GRID <span>//</span></span>
+        <span class="ticker-item">GARMENTS · OBJECTS · DIGITAL IDENTITY <span>//</span></span>
+      </div>
+    </div>
+
+    <!-- ================= 01 / MANIFESTO ================= -->
+    <section id="manifesto" class="manifesto-section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="mono" style="opacity:0.6; display:block; margin-bottom:10px;">01 // BRAND ARCHITECTURE</span>
+            <h2 class="section-title">Why we stepped off<br />the default grid.</h2>
+          </div>
+          <p style="max-width:420px; opacity:0.75; font-size:0.95rem;">
+            Mainstream drops optimize for volume and loud branding. We strip away the clutter to focus on proportion, material honesty, and reliable execution.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          <article class="pillar-card">
+            <div>
+              <span class="mono" style="opacity:0.55; display:block; margin-bottom:16px;">PILLAR 01</span>
+              <h3>Identity Without Clutter</h3>
+              <p>Oversized graphics age fast. Our interlocking OC mark is placed with restraint—tonal embroidery, anodized etching, and clean structural cuts that let your silhouette speak first.</p>
+            </div>
+            <div class="mono pillar-solve">SOLVES: OVER-DESIGNED BILLBOARD WEAR</div>
+          </article>
+
+          <article class="pillar-card">
+            <div>
+              <span class="mono" style="opacity:0.55; display:block; margin-bottom:16px;">PILLAR 02</span>
+              <h3>Built For Real Daily Use</h3>
+              <p>Whether you're pulling late nights in a studio, building software, or dialing in a minimalist desk setup, every piece is engineered around heavyweight textiles and tactile hardware.</p>
+            </div>
+            <div class="mono pillar-solve">SOLVES: GENERIC MASS-MARKET CLONES</div>
+          </article>
+
+          <article class="pillar-card">
+            <div>
+              <span class="mono" style="opacity:0.55; display:block; margin-bottom:16px;">PILLAR 03</span>
+              <h3>Verified Drop Discipline</h3>
+              <p>No phantom pre-orders or endless shipping delays. Every release is produced in calibrated small batches, inspected in-house, and dispatched within 48 hours.</p>
+            </div>
+            <div class="mono pillar-solve">SOLVES: LOW-EFFORT, UNRELIABLE DROPS</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 02 / CURATED DROPS ================= -->
+    <section id="drops" class="section-pad">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="mono" style="color:var(--text-faint); display:block; margin-bottom:10px;">02 // CURATED EDITION</span>
+            <h2 class="section-title">Series 04 Artifacts</h2>
+          </div>
+
+          <div class="filter-bar" role="tablist" aria-label="Filter drops">
+            <button class="filter-btn active" data-filter="all">All (06)</button>
+            <button class="filter-btn" data-filter="apparel">Apparel</button>
+            <button class="filter-btn" data-filter="objects">Objects</button>
+            <button class="filter-btn" data-filter="digital">Digital</button>
+          </div>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid"></div>
+      </div>
+    </section>
+
+    <!-- ================= 03 / STUDIO WORK ================= -->
+    <section id="studio" class="section-pad">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="mono" style="color:var(--text-faint); display:block; margin-bottom:10px;">03 // DIGITAL &amp; VISUAL PRACTICE</span>
+            <h2 class="section-title">OFF CULTURE Studio</h2>
+          </div>
+          <button class="btn btn-dark" id="openInquiryBtn">Commission a Project →</button>
+        </div>
+
+        <div class="studio-grid">
+          <div class="studio-tabs" id="studioTabs">
+            <button class="studio-tab active" data-studio="identity">
+              <div>
+                <span class="mono" style="color:var(--text-faint);">CAPABILITY // 01</span>
+                <span class="studio-tab-title">Visual Identity Systems</span>
+              </div>
+              <span class="mono">→</span>
+            </button>
+            <button class="studio-tab" data-studio="digital">
+              <div>
+                <span class="mono" style="color:var(--text-faint);">CAPABILITY // 02</span>
+                <span class="studio-tab-title">Web Flagships &amp; UI Architecture</span>
+              </div>
+              <span class="mono">→</span>
+            </button>
+            <button class="studio-tab" data-studio="gear">
+              <div>
+                <span class="mono" style="color:var(--text-faint);">CAPABILITY // 03</span>
+                <span class="studio-tab-title">Custom Hardware &amp; Capsule Gear</span>
+              </div>
+              <span class="mono">→</span>
+            </button>
+          </div>
+
+          <div class="studio-preview" id="studioPreview"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 04 / DISPATCH ================= -->
+    <section id="dispatch" class="section-pad" style="border-bottom:none;">
+      <div class="container">
+        <div class="dispatch-box">
+          <div>
+            <span class="mono" style="color:var(--text-faint); display:block; margin-bottom:12px;">04 // SIGNAL DISPATCH</span>
+            <h2 class="section-title" style="margin-bottom:14px;">Culture, re-edited.<br />Straight to your inbox.</h2>
+            <p style="color:var(--text-muted); max-width:460px;">
+              Early private links for numbered garment drops, desk hardware restocks, and studio release notes. Zero noise, zero spam.
+            </p>
+          </div>
+
+          <form class="dispatch-form" id="dispatchForm" novalidate>
+            <label for="dispatchEmail" class="mono" style="color:var(--text-faint);">Direct Access Email</label>
+            <div class="dispatch-row">
+              <input type="email" id="dispatchEmail" class="input-field" placeholder="you@domain.com" required />
+              <button type="submit" class="btn btn-dark" style="white-space:nowrap;">Join List</button>
+            </div>
+            <div class="form-feedback" id="dispatchFeedback"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-lockup" style="margin-bottom:18px;">
+            <img src="logo.png" alt="OFF CULTURE Logo" class="brand-badge-img" onerror="this.hidden=true; this.nextElementSibling.hidden=false;" />
+            <svg class="brand-mark" viewBox="8 6 98 60" aria-hidden="true" hidden>
+              <mask id="oc-cut-footer" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="72">
+                <rect x="0" y="0" width="120" height="72" fill="#ffffff" />
+                <path d="M 63.9 44.9 A 27.4 27.4 0 0 1 40.4 63.3" fill="none" stroke="#000000" stroke-width="3.6" stroke-linecap="round" />
+              </mask>
+              <path d="M 92.8 27.2 A 19.5 19.5 0 1 0 92.8 44.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="butt" mask="url(#oc-cut-footer)" />
+              <circle cx="38" cy="36" r="19.5" fill="none" stroke="currentColor" stroke-width="13" />
+            </svg>
+            <span class="brand-wordmark">OFF CULTURE</span>
+          </div>
+          <p style="color:var(--text-muted); font-size:0.9rem; max-width:320px;">
+            Stepping outside default trends to build deliberate, high-signal goods and modern digital identities.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Index</h4>
+          <ul>
+            <li><a href="#manifesto">Ethos</a></li>
+            <li><a href="#drops">Series 04 Drops</a></li>
+            <li><a href="#studio">Studio Work</a></li>
+            <li><a href="#dispatch">Signal List</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#drops" onclick="openModalInfo('shipping')">48H Dispatch Policy</a></li>
+            <li><a href="#drops" onclick="openModalInfo('sizing')">Garment Fit Guide</a></li>
+            <li><a href="#studio" id="footerInquiryLink">Studio Commissions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Channels</h4>
+          <ul>
+            <li><a href="#top">Instagram // @offculture</a></li>
+            <li><a href="#top">X // @offculture_grid</a></li>
+            <li><a href="#top">Are.na // off-culture</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom mono">
+        <span>© 2025 OFF CULTURE STUDIO. ALL RIGHTS RESERVED.</span>
+        <span>BUILT OFF THE DEFAULT GRID.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= OVERLAY + BAG DRAWER ================= -->
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="drawer" id="bagDrawer" aria-label="Shopping Bag">
+    <div class="drawer-head">
+      <div>
+        <span class="mono" style="color:var(--text-faint); display:block;">OFF CULTURE // ORDER</span>
+        <strong style="font-family:var(--font-display); font-size:1.15rem;">Your Bag</strong>
+      </div>
+      <button class="icon-btn" id="closeBagBtn">CLOSE ✕</button>
+    </div>
+
+    <div class="drawer-body" id="bagItemsContainer"></div>
+
+    <div class="drawer-foot">
+      <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+        <span class="mono" style="color:var(--text-muted);">Dispatch</span>
+        <span class="mono" id="bagShipping">COMPLIMENTARY OVER $150</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:18px;">
+        <span class="mono">Subtotal</span>
+        <strong style="font-family:var(--font-display); font-size:1.35rem;" id="bagSubtotal">$0</strong>
+      </div>
+      <button class="btn btn-dark" style="width:100%;" id="checkoutBtn">Proceed to Checkout →</button>
+      <p class="mono" id="checkoutMsg" style="margin-top:10px; color:var(--text-muted); text-align:center;"></p>
+    </div>
+  </aside>
+
+  <!-- ================= QUICK VIEW / INQUIRY MODAL ================= -->
+  <div class="modal" id="universalModal" role="dialog" aria-modal="true">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; padding-bottom:14px; border-bottom:1px solid var(--border);">
+      <span class="mono" id="modalEyebrow">SPECIFICATION</span>
+      <button class="icon-btn" id="closeModalBtn">CLOSE ✕</button>
+    </div>
+    <div id="modalContent"></div>
+  </div>
+
+  <script>
+    // ================= REUSABLE EXACT OC SVG MARK =================
+    let svgUid = 0;
+    function getOCMarkSVG(width = 48) {
+      const id = `oc-cut-${++svgUid}`;
+      return `
+        <svg viewBox="8 6 98 60" width="${width}" aria-hidden="true">
+          <mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="72">
+            <rect x="0" y="0" width="120" height="72" fill="#ffffff" />
+            <path d="M 63.9 44.9 A 27.4 27.4 0 0 1 40.4 63.3" fill="none" stroke="#000000" stroke-width="3.6" stroke-linecap="round" />
+          </mask>
+          <path d="M 92.8 27.2 A 19.5 19.5 0 1 0 92.8 44.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="butt" mask="url(#${id})" />
+          <circle cx="38" cy="36" r="19.5" fill="none" stroke="currentColor" stroke-width="13" />
+        </svg>`;
+    }
+
+    // ================= DATA =================
+    const TAGLINES = [
+      'BUILT OFF THE DEFAULT GRID.',
+      'OUTSIDE THE NOISE.',
+      'CULTURE, RE-EDITED.'
+    ];
+
+    const PRODUCTS = [
+      {
+        id: 'oc-01',
+        code: 'OC-01',
+        category: 'apparel',
+        tag: '320GSM JERSEY',
+        name: 'Boxy Tonal Tee',
+        price: 68,
+        desc: 'Drop-shoulder silhouette in enzyme-washed organic cotton with high-density tonal OC neck mark.',
+        specs: ['100% Organic Combed Cotton (320gsm)', 'Dropped shoulder, cropped boxy block', 'Tonal silicon OC mark at back collar', 'Pre-shrunk, zero side-seam twist'],
+        variants: ['S', 'M', 'L', 'XL'],
+        svg: `
+          <svg viewBox="0 0 180 140" width="170" height="132" aria-hidden="true">
+            <path d="M52 24 L30 38 L42 62 L54 54 L54 118 L126 118 L126 54 L138 62 L150 38 L128 24 L108 24 C104 34 76 34 72 24 Z" fill="none" stroke="currentColor" stroke-width="2.2"/>
+            <path d="M72 24 C76 34 104 34 108 24" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <g transform="translate(80, 44) scale(0.22)">
+              <path d="M 92.8 27.2 A 19.5 19.5 0 1 0 92.8 44.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="butt"/>
+              <circle cx="38" cy="36" r="19.5" fill="none" stroke="currentColor" stroke-width="13"/>
+            </g>
+          </svg>`
+      },
+      {
+        id: 'oc-02',
+        code: 'OC-02',
+        category: 'apparel',
+        tag: 'NYLON TWILL',
+        name: 'Grid Utility Overshirt',
+        price: 165,
+        desc: 'Water-repellent Japanese nylon twill with concealed matte snaps and articulated studio pockets.',
+        specs: ['Japanese 210gsm matte nylon twill', 'DWR weather-resistant finish', 'Concealed placket + internal tech pocket', 'Subtle woven OC tab at left hem'],
+        variants: ['S', 'M', 'L', 'XL'],
+        svg: `
+          <svg viewBox="0 0 180 140" width="170" height="132" aria-hidden="true">
+            <path d="M55 20 L26 42 L34 94 L50 92 L50 122 L130 122 L130 92 L146 94 L154 42 L125 20 L106 20 L90 32 L74 20 Z" fill="none" stroke="currentColor" stroke-width="2.2"/>
+            <line x1="90" y1="32" x2="90" y2="122" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="60" y="54" width="22" height="26" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="98" y="54" width="22" height="26" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <g transform="translate(103, 98) scale(0.16)">
+              <path d="M 92.8 27.2 A 19.5 19.5 0 1 0 92.8 44.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="butt"/>
+              <circle cx="38" cy="36" r="19.5" fill="none" stroke="currentColor" stroke-width="13"/>
+            </g>
+          </svg>`
+      },
+      {
+        id: 'oc-03',
+        code: 'OC-03',
+        category: 'objects',
+        tag: 'DESK ARCHITECTURE',
+        name: 'Coordinate Desk Mat',
+        price: 48,
+        desc: '900×400mm micro-weave speed surface with low-profile stitched edges for builders and gamers.',
+        specs: ['900 × 400 × 4mm natural rubber base', 'Low-friction precision cloth weave', 'Flush anti-fray micro-stitching', 'Corner-printed OC grid telemetry'],
+        variants: ['900x400mm (Chalk)', '900x400mm (Obsidian)'],
+        svg: `
+          <svg viewBox="0 0 180 140" width="175" height="132" aria-hidden="true">
+            <rect x="18" y="34" width="144" height="72" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/>
+            <line x1="18" y1="58" x2="162" y2="58" stroke="currentColor" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.45"/>
+            <line x1="18" y1="82" x2="162" y2="82" stroke="currentColor" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.45"/>
+            <line x1="66" y1="34" x2="66" y2="106" stroke="currentColor" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.45"/>
+            <line x1="114" y1="34" x2="114" y2="106" stroke="currentColor" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.45"/>
+            <g transform="translate(128, 82) scale(0.22)">
+              <path d="M 92.8 27.2 A 19.5 19.5 0 1 0 92.8 44.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="butt"/>
+              <circle cx="38" cy="36" r="19.5" fill="none" stroke="currentColor" stroke-width="13"/>
+            </g>
+          </svg>`
+      },
+      {
+        id: 'oc-04',
+        code: 'OC-04',
+        category: 'objects',
+        tag: 'CNC 6063 ALUM',
+        name: 'Anodized Artisan Keycap',
+        price: 54,
+        desc: 'Precision-milled 1U Cherry-profile aluminum keycap laser-etched with the interlocking OC mark.',
+        specs: ['CNC-machined 6063 aerospace aluminum', 'Bead-blasted matte anodized coat', 'MX stem compatible (Esc / 1U row)', 'Micro-etched top OC monogram'],
+        variants: ['Anodized Black', 'Raw Silver'],
+        svg: `
+          <svg viewBox="0 0 180 140" width="170" height="132" aria-hidden="true">
+            <polygon points="48,96 62,38 118,38 132,96" fill="none" stroke="currentColor" stroke-width="2.2"/>
+            <rect x="64" y="42" width="52" height="44" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <g transform="translate(75, 54) scale(0.28)">
+              <path d="M 92.8 27.2 A 19.5 19.5 0 1 0 92.8 44.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="butt"/>
+              <circle cx="38" cy="36" r="19.5" fill="none" stroke="currentColor" stroke-width="13"/>
+            </g>
+          </svg>`
+      },
+      {
+        id: 'oc-05',
+        code: 'OC-05',
+        category: 'objects',
+        tag: '16OZ CANVAS',
+        name: 'Modular Studio Tote',
+        price: 85,
+        desc: 'Structured waxed canvas carryall built for 16" laptops, cameras, and daily studio transit.',
+        specs: ['16oz dry-waxed cotton duck canvas', 'Padded 16" laptop compartment', 'Seatbelt-grade matte nylon webbing', 'Blind-debossed leather OC patch'],
+        variants: ['One Size (22L)'],
+        svg: `
+          <svg viewBox="0 0 180 140" width="170" height="132" aria-hidden="true">
+            <path d="M68 48 C68 20 112 20 112 48" fill="none" stroke="currentColor" stroke-width="2.2"/>
+            <polygon points="42,48 138,48 130,118 50,118" fill="none" stroke="currentColor" stroke-width="2.2"/>
+            <line x1="45" y1="68" x2="135" y2="68" stroke="currentColor" stroke-width="1.4"/>
+            <g transform="translate(76, 80) scale(0.26)">
+              <path d="M 92.8 27.2 A 19.5 19.5 0 1 0 92.8 44.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="butt"/>
+              <circle cx="38" cy="36" r="19.5" fill="none" stroke="currentColor" stroke-width="13"/>
+            </g>
+          </svg>`
+      },
+      {
+        id: 'oc-06',
+        code: 'OC-06',
+        category: 'digital',
+        tag: 'FIGMA + TOKENS',
+        name: 'Default-Off UI Kit v2',
+        price: 39,
+        desc: 'Modular architectural design system for indie builders: 140+ responsive components & type scales.',
+        specs: ['140+ auto-layout Figma components', 'Light/Dark JSON design tokens', 'Editorial grid & monospace specimen sheets', 'Commercial indie & studio license'],
+        variants: ['Single Builder License'],
+        svg: `
+          <svg viewBox="0 0 180 140" width="170" height="132" aria-hidden="true">
+            <rect x="26" y="24" width="128" height="92" fill="none" stroke="currentColor" stroke-width="2.2"/>
+            <line x1="26" y1="44" x2="154" y2="44" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="38" y="56" width="46" height="46" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="96" y1="60" x2="140" y2="60" stroke="currentColor" stroke-width="2"/>
+            <line x1="96" y1="74" x2="132" y2="74" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+            <line x1="96" y1="88" x2="124" y2="88" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+            <g transform="translate(46, 69) scale(0.28)">
+              <path d="M 92.8 27.2 A 19.5 19.5 0 1 0 92.8 44.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="butt"/>
+              <circle cx="38" cy="36" r="19.5" fill="none" stroke="currentColor" stroke-width="13"/>
+            </g>
+          </svg>`
+      }
+    ];
+
+    const STUDIO_DATA = {
+      identity: {
+        eyebrow: 'CASE STUDY // KINETIC AUDIO LABS',
+        title: 'Monogram, Type & Packaging Architecture',
+        desc: 'We strip away cliché startup gradients and replace them with disciplined geometric marks, tactile print specs, and cohesive digital-to-physical brand guidelines.',
+        deliverables: ['Custom Monogram', 'Typography System', 'Packaging Specs', 'Brand Playbook'],
+        visual: `
+          <div style="display:flex; align-items:center; gap:20px;">
+            <div style="width:78px; height:78px; border-radius:50%; background:#F4F4F3; border:1px solid rgba(10,10,10,0.1); overflow:hidden; display:flex; align-items:center; justify-content:center; color:#0A0A0A;">
+              <img src="logo.png" alt="OC Mark" style="width:100%; height:100%; object-fit:cover;" onerror="this.hidden=true; this.nextElementSibling.hidden=false;" />
+              <div hidden style="display:flex; align-items:center; justify-content:center;">${getOCMarkSVG(46)}</div>
+            </div>
+            <div>
+              <div class="mono" style="color:var(--text-faint);">RATIO // 1:1.618</div>
+              <div style="font-family:var(--font-logo); font-size:1.15rem; font-weight:700; letter-spacing:0.22em;">HIGH-SIGNAL MARK</div>
+            </div>
+          </div>
+          <div class="mono" style="text-align:right; color:var(--text-muted);">
+            GRID: 8PX BASE<br/>TRACKING: +0.36EM
+          </div>`
+      },
+      digital: {
+        eyebrow: 'CASE STUDY // MONO-01 LAUNCH FLAGSHIP',
+        title: 'High-Speed Web Flagships & Drop Portals',
+        desc: 'Custom-coded storefronts and portfolio flagships engineered for sub-second loads, zero template bloat, and crisp editorial storytelling.',
+        deliverables: ['Frontend Engineering', 'Interactive Lookbooks', 'Design Tokens', 'Performance Audit'],
+        visual: `
+          <div style="width:100%; display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div style="border:1px solid var(--border); padding:14px; background:var(--bg);">
+              <span class="mono" style="color:var(--text-faint);">LIGHTHOUSE</span>
+              <div style="font-family:var(--font-display); font-size:1.8rem; font-weight:700;">100 / 100</div>
+            </div>
+            <div style="border:1px solid var(--border); padding:14px; background:var(--bg);">
+              <span class="mono" style="color:var(--text-faint);">FIRST PAINT</span>
+              <div style="font-family:var(--font-display); font-size:1.8rem; font-weight:700;">0.4 SEC</div>
+            </div>
+          </div>`
+      },
+      gear: {
+        eyebrow: 'CASE STUDY // BUILDER COLLECTIVE RUN',
+        title: 'Small-Batch Merchandise & Desk Hardware',
+        desc: 'From sourcing 320gsm milled cotton to anodized aluminum desk accents, we produce cohesive physical gear for creative teams, studios, and gaming orgs.',
+        deliverables: ['Textile Sourcing', 'CNC Hardware Prototypes', 'Quality Inspection', 'Fulfillment'],
+        visual: `
+          <div style="width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;">
+            <div>
+              <span class="mono" style="color:var(--text-faint);">BATCH RUN</span>
+              <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:700;">50 – 500 UNITS</div>
+            </div>
+            <div style="border:1px solid var(--border); padding:10px 16px; background:var(--bg);" class="mono">
+              NO GENERIC BLANKS // CUSTOM SPEC
+            </div>
+          </div>`
+      }
+    };
+
+    // ================= STATE =================
+    let bag = JSON.parse(localStorage.getItem('oc_bag') || '[]');
+    let taglineIdx = 0;
+
+    // ================= THEME =================
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.getElementById('themeLabel');
+    const savedTheme = localStorage.getItem('oc_theme') || 'light';
+    applyTheme(savedTheme);
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      themeLabel.textContent = theme === 'light' ? 'DARK' : 'LIGHT';
+      localStorage.setItem('oc_theme', theme);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      applyTheme(current === 'light' ? 'dark' : 'light');
+    });
+
+    // ================= TAGLINE CYCLER =================
+    document.getElementById('taglineBtn').addEventListener('click', () => {
+      taglineIdx = (taglineIdx + 1) % TAGLINES.length;
+      document.getElementById('taglineText').textContent = TAGLINES[taglineIdx];
+    });
+
+    // ================= MOBILE MENU =================
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileDrawer.classList.toggle('open');
+    });
+    function closeMobileMenu() {
+      mobileDrawer.classList.remove('open');
+    }
+
+    // ================= CATALOG RENDER =================
+    const catalogGrid = document.getElementById('catalogGrid');
+
+    function renderCatalog(filter = 'all') {
+      const items = filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
+      catalogGrid.innerHTML = items.map(p => `
+        <article class="product-card">
+          <div class="product-visual">
+            <span class="product-tag">${p.tag}</span>
+            <span class="mono product-code">${p.code}</span>
+            ${p.svg}
+          </div>
+          <div class="product-body">
+            <div class="product-top">
+              <h3 class="product-name">${p.name}</h3>
+              <span class="product-price">$${p.price}</span>
+            </div>
+            <p class="product-desc">${p.desc}</p>
+            <div class="product-actions">
+              <button class="btn btn-dark btn-sm" onclick="addToBag('${p.id}')">Add to Bag</button>
+              <button class="btn btn-outline btn-sm" onclick="openProductModal('${p.id}')">Specs</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCatalog(btn.dataset.filter);
+      });
+    });
+
+    // ================= STUDIO TABS =================
+    const studioPreview = document.getElementById('studioPreview');
+
+    function renderStudio(key) {
+      const data = STUDIO_DATA[key];
+      studioPreview.innerHTML = `
+        <div>
+          <span class="mono" style="color:var(--text-faint); display:block; margin-bottom:14px;">${data.eyebrow}</span>
+          <div class="studio-canvas">${data.visual}</div>
+          <h3 style="font-family:var(--font-display); font-size:1.5rem; margin-bottom:10px;">${data.title}</h3>
+          <p style="color:var(--text-muted); font-size:0.95rem;">${data.desc}</p>
+          <div class="studio-deliverables">
+            ${data.deliverables.map(d => `<span class="chip">${d}</span>`).join('')}
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-outline" onclick="openInquiryModal('${data.title}')">Request Similar Scope →</button>
+        </div>
+      `;
+    }
+
+    document.querySelectorAll('.studio-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.studio-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderStudio(tab.dataset.studio);
+      });
+    });
+
+    // ================= BAG / CART =================
+    const overlay = document.getElementById('overlay');
+    const bagDrawer = document.getElementById('bagDrawer');
+    const bagItemsContainer = document.getElementById('bagItemsContainer');
+    const bagCount = document.getElementById('bagCount');
+    const bagSubtotal = document.getElementById('bagSubtotal');
+    const bagShipping = document.getElementById('bagShipping');
+    const checkoutMsg = document.getElementById('checkoutMsg');
+
+    function saveAndRenderBag() {
+      localStorage.setItem('oc_bag', JSON.stringify(bag));
+      const totalQty = bag.reduce((sum, item) => sum + item.qty, 0);
+      const subtotal = bag.reduce((sum, item) => sum + item.price * item.qty, 0);
+      bagCount.textContent = `(${totalQty})`;
+      bagSubtotal.textContent = `$${subtotal}`;
+      bagShipping.textContent = subtotal >= 150 ? 'COMPLIMENTARY' : (subtotal === 0 ? 'CALCULATED AT CHECKOUT' : '$12 FLAT RATE');
+
+      if (bag.length === 0) {
+        bagItemsContainer.innerHTML = `
+          <div style="padding:48px 0; text-align:center; color:var(--text-muted);">
+            <p class="mono" style="margin-bottom:10px;">YOUR BAG IS EMPTY</p>
+            <p style="font-size:0.9rem;">Explore Series 04 garments, desk hardware, and digital kits.</p>
+          </div>`;
+        return;
+      }
+
+      bagItemsContainer.innerHTML = bag.map((item, idx) => {
+        const product = PRODUCTS.find(p => p.id === item.id);
+        return `
+          <div class="bag-item">
+            <div class="bag-thumb">
+              <div style="transform:scale(0.32);">${product ? product.svg : ''}</div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-display); font-weight:600;">${item.name}</div>
+              <div class="mono" style="color:var(--text-faint);">${item.variant} // $${item.price}</div>
+              <div class="qty-ctrl">
+                <button onclick="updateQty(${idx}, -1)" aria-label="Decrease quantity">-</button>
+                <span>${item.qty}</span>
+                <button onclick="updateQty(${idx}, 1)" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+            <button class="mono" style="color:var(--text-faint);" onclick="removeBagItem(${idx})">RMV</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addToBag(id, variant = null) {
+      const product = PRODUCTS.find(p => p.id === id);
+      if (!product) return;
+      const chosenVariant = variant || product.variants[0];
+      const existing = bag.find(i => i.id === id && i.variant === chosenVariant);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        bag.push({ id: product.id, name: product.name, price: product.price, variant: chosenVariant, qty: 1 });
+      }
+      checkoutMsg.textContent = '';
+      saveAndRenderBag();
+      openBag();
+    }
+
+    function updateQty(idx, delta) {
+      bag[idx].qty += delta;
+      if (bag[idx].qty <= 0) bag.splice(idx, 1);
+      saveAndRenderBag();
+    }
+
+    function removeBagItem(idx) {
+      bag.splice(idx, 1);
+      saveAndRenderBag();
+    }
+
+    function openBag() {
+      closeModal();
+      overlay.classList.add('open');
+      bagDrawer.classList.add('open');
+    }
+
+    function closeBag() {
+      bagDrawer.classList.remove('open');
+      if (!universalModal.classList.contains('open')) overlay.classList.remove('open');
+    }
+
+    document.getElementById('openBagBtn').addEventListener('click', openBag);
+    document.getElementById('closeBagBtn').addEventListener('click', closeBag);
+
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if (bag.length === 0) {
+        checkoutMsg.textContent = 'ADD AN ARTIFACT FIRST.';
+        return;
+      }
+      const orderNum = 'OC-' + Math.floor(1000 + Math.random() * 9000);
+      bag = [];
+      saveAndRenderBag();
+      checkoutMsg.textContent = `ORDER ${orderNum} RESERVED // DISPATCHING WITHIN 48H.`;
+    });
+
+    // ================= MODALS =================
+    const universalModal = document.getElementById('universalModal');
+    const modalEyebrow = document.getElementById('modalEyebrow');
+    const modalContent = document.getElementById('modalContent');
+
+    function openModal(eyebrow, html) {
+      closeBag();
+      modalEyebrow.textContent = eyebrow;
+      modalContent.innerHTML = html;
+      overlay.classList.add('open');
+      universalModal.classList.add('open');
+    }
+
+    function closeModal() {
+      universalModal.classList.remove('open');
+      if (!bagDrawer.classList.contains('open')) overlay.classList.remove('open');
+    }
+
+    document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    overlay.addEventListener('click', () => {
+      closeBag();
+      closeModal();
+    });
+
+    function openProductModal(id) {
+      const p = PRODUCTS.find(x => x.id === id);
+      if (!p) return;
+      openModal(`${p.code} // TECHNICAL SPECIFICATION`, `
+        <div style="display:grid; grid-template-columns:1fr; gap:24px;">
+          <div style="background:var(--bg-card); border:1px solid var(--border); padding:28px; display:flex; justify-content:center;">
+            ${p.svg}
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;">
+              <h3 style="font-family:var(--font-display); font-size:1.5rem;">${p.name}</h3>
+              <span class="mono" style="font-size:1rem;">$${p.price}</span>
+            </div>
+            <p style="color:var(--text-muted); margin-bottom:18px;">${p.desc}</p>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:22px; padding:16px; border:1px solid var(--border); background:var(--bg);">
+              ${p.specs.map(s => `<li class="mono" style="color:var(--text-muted);">• ${s}</li>`).join('')}
+            </ul>
+            <label class="mono" style="display:block; margin-bottom:8px; color:var(--text-faint);">Select Option / Size</label>
+            <select id="modalVariantSelect" class="input-field" style="margin-bottom:16px;">
+              ${p.variants.map(v => `<option value="${v}">${v}</option>`).join('')}
+            </select>
+            <button class="btn btn-dark" style="width:100%;" onclick="addToBag('${p.id}', document.getElementById('modalVariantSelect').value)">Add to Bag — $${p.price}</button>
+          </div>
+        </div>
+      `);
+    }
+
+    function openInquiryModal(prefill = '') {
+      openModal('STUDIO COMMISSION // BRIEF', `
+        <h3 style="font-family:var(--font-display); font-size:1.45rem; margin-bottom:8px;">Build with OFF CULTURE Studio</h3>
+        <p style="color:var(--text-muted); margin-bottom:20px; font-size:0.92rem;">Need a clean visual identity, custom web flagship, or small-batch capsule gear? Drop your brief below.</p>
+        <form id="inquiryForm" style="display:flex; flex-direction:column; gap:14px;">
+          <input type="text" class="input-field" placeholder="Your Name or Collective" required />
+          <input type="email" class="input-field" placeholder="Email Address" required />
+          <input type="text" class="input-field" placeholder="Project Scope" value="${prefill}" required />
+          <textarea class="input-field" rows="3" placeholder="Timeline, goals, and references..."></textarea>
+          <button type="submit" class="btn btn-dark">Transmit Brief →</button>
+          <div class="form-feedback" id="inquiryFeedback"></div>
+        </form>
+      `);
+      document.getElementById('inquiryForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        document.getElementById('inquiryFeedback').textContent = 'BRIEF RECEIVED // STUDIO WILL RESPOND WITHIN 24 HOURS.';
+        e.target.reset();
+      });
+    }
+
+    function openModalInfo(type) {
+      if (type === 'shipping') {
+        openModal('POLICY // 48H DISPATCH', `
+          <h3 style="font-family:var(--font-display); font-size:1.35rem; margin-bottom:10px;">Verified In-Stock Fulfillment</h3>
+          <p style="color:var(--text-muted);">Every Series 04 item is held in stock before launch. Orders placed before 14:00 ship within 48 business hours with live tracking. Complimentary shipping on orders over $150.</p>
+        `);
+      } else {
+        openModal('FIT GUIDE // BOXY BLOCK', `
+          <h3 style="font-family:var(--font-display); font-size:1.35rem; margin-bottom:10px;">Relaxed, Deliberate Proportions</h3>
+          <p style="color:var(--text-muted);">Our apparel uses a custom boxy block with slightly dropped shoulders and a clean cropped-to-belt length. Take your true size for a structured relaxed fit, or size up for an oversized drape.</p>
+        `);
+      }
+    }
+
+    document.getElementById('openInquiryBtn').addEventListener('click', () => openInquiryModal());
+    document.getElementById('footerInquiryLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      openInquiryModal();
+    });
+
+    // ================= DISPATCH FORM =================
+    document.getElementById('dispatchForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('dispatchEmail').value.trim();
+      const feedback = document.getElementById('dispatchFeedback');
+      if (!email || !email.includes('@')) {
+        feedback.textContent = 'ENTER A VALID EMAIL ADDRESS.';
+        return;
+      }
+      feedback.textContent = `SIGNAL LOCKED // ${email.toUpperCase()} ADDED TO EARLY ACCESS.`;
+      e.target.reset();
+    });
+
+    // ================= INIT =================
+    renderCatalog('all');
+    renderStudio('identity');
+    saveAndRenderBag();
+  </script>
+</body>
+</html>
